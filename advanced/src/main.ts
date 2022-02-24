@@ -10,7 +10,8 @@ async function bootstrap() {
   app.useGlobalFilters(new AllExceptionFilter(httpAdapterHost));
   // 全局守卫
   app.useGlobalGuards(new AuthGuard());
-  await app.listen(3000);
-  console.log('\n server start at: http://localhost:3000 ');
+  const port = 3012;
+  await app.listen(port);
+  console.log(`\n server start at: http://localhost:${port} `);
 }
 bootstrap();

@@ -8,6 +8,7 @@ import {
   Post,
   Put,
   Query,
+  Req,
   UseFilters,
   UseGuards,
   UseInterceptors,
@@ -57,9 +58,13 @@ export class AppController {
 
   // 访问路径 http://localhost:3000/app/:id, id = 1
   @Get(':id')
-  findOne(@Param('id') id: string, @User('hello') user: any) {
-    console.log('user', user);
-    return `This action returns a #${id} cat`;
+  async findOne(@Param('id') id: string, @User('hello') user: any, @Req() req) {
+    return new Promise((resolve, reject) => {
+      console.log('user', user, req.content);
+      setTimeout(() => {
+        resolve(`This action returns a #${id} cat`);
+      }, 1000);
+    });
   }
 
   @Post()
